@@ -1,5 +1,6 @@
 package com.plimadev.virtus.dto;
 
+import com.plimadev.virtus.model.Character;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDateTime;

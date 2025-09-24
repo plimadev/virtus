@@ -31,7 +31,6 @@ public class User {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-    @ToString.Exclude
     private Character character;
 
 }
