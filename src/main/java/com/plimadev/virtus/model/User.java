@@ -1,11 +1,9 @@
-package com.plimadev.virtus.Entity;
+package com.plimadev.virtus.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
-import java.util.Objects;
 
 
 @Entity

@@ -1,4 +1,4 @@
-package com.plimadev.virtus.Entity;
+package com.plimadev.virtus.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
