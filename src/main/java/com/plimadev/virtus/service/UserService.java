@@ -51,6 +51,17 @@ public class UserService {
                 user.getCreatedAt()
         );
 
+    }
 
+    public UserProfileResponse getUserProfile(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+        return new UserProfileResponse(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getCharacter(),
+                user.getCreatedAt()
+        );
     }
 }
