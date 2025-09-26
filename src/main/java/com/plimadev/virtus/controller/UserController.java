@@ -39,6 +39,6 @@ public class UserController {
     ) {
         return ResponseEntity.ok(characterService.updateCharacterName(id, newName));
     }
-
+    
 
 }
