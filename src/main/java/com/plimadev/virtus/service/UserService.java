@@ -1,5 +1,6 @@
 package com.plimadev.virtus.service;
 
+import com.plimadev.virtus.dto.CharacterResponse;
 import com.plimadev.virtus.dto.RegisterUserRequest;
 import com.plimadev.virtus.dto.UserProfileResponse;
 import com.plimadev.virtus.model.Character;
@@ -24,21 +25,23 @@ public class UserService {
     }
 
     public UserProfileResponse registerUser(RegisterUserRequest request){
-        if(userRepository.existsByEmail(request.email())) {
+        if(userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("Email already in use");
         }
-        if(userRepository.existsByUsername(request.username())){
+        if(userRepository.existsByUsername(request.getUsername())){
             throw new IllegalArgumentException("Username already in use");
         }
 
         User user = new User();
-        user.setUsername(request.username());
-        user.setEmail(request.email());
-        user.setPasswordHash(passwordEncoder.encode(request.password()));
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPasswordHash(passwordEncoder.encode(request.getPassword()));
 
         Character character = new Character();
-        character.setName(request.characterName());
+        character.setName(request.getCharacterName());
         character.setUser(user);
+
+        user.setCharacter(character);
 
         //cascades to character ?
         userRepository.save(user);
@@ -47,7 +50,7 @@ public class UserService {
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
-                user.getCharacter(),
+                new CharacterResponse(user.getCharacter().getId(), user.getCharacter().getName()),
                 user.getCreatedAt()
         );
 
@@ -60,7 +63,7 @@ public class UserService {
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
-                user.getCharacter(),
+                new CharacterResponse(user.getCharacter().getId(), user.getCharacter().getName()),
                 user.getCreatedAt()
         );
     }
